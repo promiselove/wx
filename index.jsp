@@ -7,8 +7,9 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" session="false" isErrorPage="true" %>
 <%
-  boolean isSuccess = false;
-  isSuccess = WeiXinService.createMenu(application);
+  //boolean isSuccess = WeiXinService.createMenu(application);//创建自定义菜单
+  String result = WeiXinService.getAutoRule(application);
+  System.out.println(result);
 %>
 <html>
   <head>

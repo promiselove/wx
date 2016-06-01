@@ -11,6 +11,7 @@ public class WeiXinService {
 
 	public static final String APP_ID="wx91bb7ecbb79282d1";
 	public static final String APP_SECRET="d07b1ef6c3868dbc98e12e3f675574d6";
+	public static final String APP_WX_ACCOUNT="gh_d891f94b50e9";
 	public static final String MCH_ID="";
 	public static final String PARTNER_ID="";
 	public static final String PARTNER_KEY="";
@@ -410,6 +411,36 @@ public class WeiXinService {
         Map isCreate = new HashMap();
         isCreate = WeiXinUtil.convertObject(WeiXinUtil.sendPost(url,datas));
         return "0.0".equals(isCreate.get("errcode")+"");
+    }
+
+    /**
+     * 获取自动回复规则
+     * @param application
+     * @return
+     */
+    public static String getAutoRule(ServletContext application){
+        String accessToken = getAccessAuthToken(application);
+        String url = "https://api.weixin.qq.com/cgi-bin/get_current_autoreply_info?access_token="+accessToken;
+        return WeiXinUtil.sendGet(url);
+    }
+
+    /**
+     * 回复文本消息
+     * @param ToUserName 用户openId
+     * @param content 回复内容
+     * @return
+     */
+    public static String sendText(String ToUserName,String content){
+        long time = new Date().getTime();
+        StringBuffer sb = new StringBuffer();
+        sb.append("<xml>");
+        sb.append("<ToUserName><![CDATA["+ToUserName+"]]></ToUserName>");
+        sb.append("<FromUserName><![CDATA["+WeiXinService.APP_WX_ACCOUNT+"]]></FromUserName>");
+        sb.append("<CreateTime><![CDATA["+time+"]]></CreateTime>");
+        sb.append("<MsgType><![CDATA[text]]></MsgType>");
+        sb.append("<Content><![CDATA["+content+"]]></Content>");
+        sb.append("</xml>");
+        return sb.toString();
     }
 }
 
