@@ -9,9 +9,11 @@ import org.dom4j.DocumentException;
 
 public class WeiXinService {
 
-	public static final String APP_ID="wx91bb7ecbb79282d1";
+	public static final String APP_ID="wx91bb7ecbb79282d1"; //Amadeus测试号
 	public static final String APP_SECRET="d07b1ef6c3868dbc98e12e3f675574d6";
-	public static final String APP_WX_ACCOUNT="gh_d891f94b50e9";
+    public static final String APP_ID_OPEN="";//宇鑫开放平台测试服务号
+    public static final String APP_SECRET_OPEN="";//宇鑫开放平台测试服务号
+	public static final String APP_WX_ACCOUNT="gh_d891f94b50e9";//Amadeus测试号
 	public static final String MCH_ID="";
 	public static final String PARTNER_ID="";
 	public static final String PARTNER_KEY="";
