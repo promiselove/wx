@@ -8,8 +8,8 @@
 <%@ page contentType="text/html;charset=UTF-8" session="false" isErrorPage="true" %>
 <%
   //boolean isSuccess = WeiXinService.createMenu(application);//创建自定义菜单
-  String result = WeiXinService.getAutoRule(application);
-  System.out.println(result);
+  //String result = WeiXinService.getAutoRule(application);
+  //System.out.println(result);
 %>
 <html>
   <head>

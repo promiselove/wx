@@ -426,19 +426,150 @@ public class WeiXinService {
 
     /**
      * 回复文本消息
-     * @param ToUserName 用户openId
+     * @param toUserName 用户openId
      * @param content 回复内容
      * @return
      */
-    public static String sendText(String ToUserName,String content){
+    public static String sendText(String toUserName,String content){
         long time = new Date().getTime();
         StringBuffer sb = new StringBuffer();
         sb.append("<xml>");
-        sb.append("<ToUserName><![CDATA["+ToUserName+"]]></ToUserName>");
+        sb.append("<ToUserName><![CDATA["+toUserName+"]]></ToUserName>");
         sb.append("<FromUserName><![CDATA["+WeiXinService.APP_WX_ACCOUNT+"]]></FromUserName>");
         sb.append("<CreateTime><![CDATA["+time+"]]></CreateTime>");
         sb.append("<MsgType><![CDATA[text]]></MsgType>");
         sb.append("<Content><![CDATA["+content+"]]></Content>");
+        sb.append("</xml>");
+        return sb.toString();
+    }
+
+    /**
+     * 回复图片消息
+     * @param toUserName 用户openId
+     * @param mediaId 多媒体id
+     * @return
+     */
+    public static String sendImage(String toUserName,String mediaId){
+        long time = new Date().getTime();
+        StringBuffer sb = new StringBuffer();
+        sb.append("<xml>");
+        sb.append("<ToUserName><![CDATA["+toUserName+"]]></ToUserName>");
+        sb.append("<FromUserName><![CDATA["+WeiXinService.APP_WX_ACCOUNT+"]]></FromUserName>");
+        sb.append("<CreateTime><![CDATA["+time+"]]></CreateTime>");
+        sb.append("<MsgType><![CDATA[image]]></MsgType>");
+        sb.append("<Image>");
+        sb.append("<MediaId><![CDATA["+mediaId+"]]></MediaId>");
+        sb.append("</Image>");
+        sb.append("</xml>");
+        return sb.toString();
+    }
+
+    /**
+     * 回复语音消息
+     * @param toUserName 用户openId
+     * @param mediaId 多媒体id
+     * @return
+     */
+    public static String sendVoice(String toUserName,String mediaId){
+        long time = new Date().getTime();
+        StringBuffer sb = new StringBuffer();
+        sb.append("<xml>");
+        sb.append("<ToUserName><![CDATA["+toUserName+"]]></ToUserName>");
+        sb.append("<FromUserName><![CDATA["+WeiXinService.APP_WX_ACCOUNT+"]]></FromUserName>");
+        sb.append("<CreateTime><![CDATA["+time+"]]></CreateTime>");
+        sb.append("<MsgType><![CDATA[voice]]></MsgType>");
+        sb.append("<Voice>");
+        sb.append("<MediaId><![CDATA["+mediaId+"]]></MediaId>");
+        sb.append("</Voice>");
+        sb.append("</xml>");
+        return sb.toString();
+    }
+
+    /**
+     * 回复视频消息
+     * @param toUserName 用户openId
+     * @param mediaId 多媒体id
+     * @param title 视频标题
+     * @param description 视频描述
+     * @return
+     */
+    public static String sendVideo(String toUserName,String mediaId,String title,String description){
+        long time = new Date().getTime();
+        StringBuffer sb = new StringBuffer();
+        sb.append("<xml>");
+        sb.append("<ToUserName><![CDATA["+toUserName+"]]></ToUserName>");
+        sb.append("<FromUserName><![CDATA["+WeiXinService.APP_WX_ACCOUNT+"]]></FromUserName>");
+        sb.append("<CreateTime><![CDATA["+time+"]]></CreateTime>");
+        sb.append("<MsgType><![CDATA[video]]></MsgType>");
+        sb.append("<Video>");
+        sb.append("<MediaId><![CDATA["+mediaId+"]]></MediaId>");
+        sb.append("<Title><![CDATA["+title+"]]></Title>");
+        sb.append("<Description><![CDATA["+description+"]]></Description>");
+        sb.append("</Video>");
+        sb.append("</xml>");
+        return sb.toString();
+    }
+
+    /**
+     * 回复音乐消息
+     * @param toUserName 用户openId
+     * @param thumbMediaId 缩略图的媒体id，通过素材管理接口上传多媒体文件，得到的id
+     * @param title 音乐标题
+     * @param description 音乐描述
+     * @param url 音乐链接
+     * @param hqUrl 高质量音乐链接，WIFI环境优先使用该链接播放音乐
+     * @return
+     */
+    public static String sendMusic(String toUserName,String thumbMediaId,String title,String description,String url,String hqUrl){
+        long time = new Date().getTime();
+        StringBuffer sb = new StringBuffer();
+        sb.append("<xml>");
+        sb.append("<ToUserName><![CDATA["+toUserName+"]]></ToUserName>");
+        sb.append("<FromUserName><![CDATA["+WeiXinService.APP_WX_ACCOUNT+"]]></FromUserName>");
+        sb.append("<CreateTime><![CDATA["+time+"]]></CreateTime>");
+        sb.append("<MsgType><![CDATA[music]]></MsgType>");
+        sb.append("<Music>");
+        sb.append("<Title><![CDATA["+title+"]]></Title>");
+        sb.append("<Description><![CDATA["+description+"]]></Description>");
+        sb.append("<MusicUrl><![CDATA["+url+"]]></MusicUrl>");
+        sb.append("<HQMusicUrl><![CDATA["+hqUrl+"]]></HQMusicUrl>");
+        sb.append("<ThumbMediaId><![CDATA["+thumbMediaId+"]]></ThumbMediaId>");
+        sb.append("</Music>");
+        sb.append("</xml>");
+        return sb.toString();
+    }
+
+    /**
+     * 回复图文消息
+     * @param toUserName 用户openId
+     * @param count 图文消息条数
+     * @param datas [{"title":"图文消息标题","description":"图文消息描述","picUrl":"图片链接","url":"点击图文消息跳转链接"}]
+     * @return
+     */
+    public static String sendImageText(String toUserName,int count,List<Map<String,Object>> datas){
+        if(count != datas.size()){
+            return null;
+        }
+        long time = new Date().getTime();
+        StringBuffer sb = new StringBuffer();
+        sb.append("<xml>");
+        sb.append("<ToUserName><![CDATA["+toUserName+"]]></ToUserName>");
+        sb.append("<FromUserName><![CDATA["+WeiXinService.APP_WX_ACCOUNT+"]]></FromUserName>");
+        sb.append("<CreateTime><![CDATA["+time+"]]></CreateTime>");
+        sb.append("<MsgType><![CDATA[news]]></MsgType>");
+        sb.append("<ArticleCount>"+count+"</ArticleCount>");
+        sb.append("<Articles>");
+        for(int i = 0 ; i < count ; i++){
+            Map item =  new HashMap();
+            item = datas.get(i);
+            sb.append("<item>");
+            sb.append("<Title><![CDATA["+item.get("title")+"]]></Title>");
+            sb.append("<Description><![CDATA["+item.get("description")+"]]></Description>");
+            sb.append("<PicUrl><![CDATA["+item.get("picUrl")+"]]></PicUrl>");
+            sb.append("<Url><![CDATA["+item.get("url")+"]]></Url>");
+            sb.append("</item>");
+        }
+        sb.append("</Articles>");
         sb.append("</xml>");
         return sb.toString();
     }
