@@ -31,9 +31,10 @@ try {
                     if("V1001_TODAY_MUSIC".equals(eventKey)){
                         textData = WeiXinService.sendText(fromUserName,"今日歌曲");
                     }else if("V3001_GOOD".equals(eventKey)){
-                        textData = WeiXinService.sendText(fromUserName,"赞一下");
+                        //textData = WeiXinService.sendText(fromUserName,"赞一下");
+                        textData = WeiXinService.sendImage(fromUserName,"eTCjljIQTSI9M3XfawUtlOsUCSvFegtKxBFMLNJ2NKk");
                     }else if("V3002_GOOD".equals(eventKey)){
-                        textData = WeiXinService.sendText(fromUserName,"赞二下");
+                        textData = WeiXinService.sendVoice(fromUserName,"eTCjljIQTSI9M3XfawUtlGBA1N5pAh2T-MQNiFvKlcc");
                     }else if("V3003_GOOD".equals(eventKey)){
                         textData = WeiXinService.sendText(fromUserName,"赞三下");
                     }else if("V1001_GOOD".equals(eventKey)){
